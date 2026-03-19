@@ -17,12 +17,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-<!--    通用平台模块-->
+    <!--    通用平台模块-->
     <dependencies>
         <dependency>
             <groupId>com.zzyl</groupId>
             <artifactId>zzyl-common</artifactId>
         </dependency>
     </dependencies>
+
 
 </project>
