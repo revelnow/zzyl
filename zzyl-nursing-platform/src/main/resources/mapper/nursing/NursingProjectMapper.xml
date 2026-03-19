@@ -28,6 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectNursingProjectVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="orderNo != null "> and order_no = #{orderNo}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="image != null  and image != ''"> and image = #{image}</if>
+            <if test="nursingRequirement != null  and nursingRequirement != ''"> and nursing_requirement = #{nursingRequirement}</if>
             <if test="status != null "> and status = #{status}</if>
         </where>
     </select>
