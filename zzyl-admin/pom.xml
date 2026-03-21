@@ -68,6 +68,12 @@
             <artifactId>zzyl-nursing-platform</artifactId>
         </dependency>
 
+        <!--oss模块-->
+        <dependency>
+            <groupId>com.zzyl</groupId>
+            <artifactId>zzyl-oss</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
