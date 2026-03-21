@@ -4,6 +4,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zzyl.common.core.domain.R;
+import com.zzyl.nursing.dto.NursingPlanDto;
+import com.zzyl.nursing.vo.NursingPlanVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -73,7 +75,7 @@ public class NursingPlanController extends BaseController
     @ApiOperation("获取护理计划详细信息")
     @PreAuthorize("@ss.hasPermi('nursing:plan:query')")
     @GetMapping(value = "/{id}")
-    public R<NursingPlan> getInfo(@ApiParam(value = "护理计划ID", required = true) @PathVariable( "id") Long id)
+    public R<NursingPlanVo> getInfo(@ApiParam(value = "护理计划ID", required = true) @PathVariable( "id") Long id)
     {
         return R.ok(nursingPlanService.selectNursingPlanById(id));
     }
@@ -85,9 +87,9 @@ public class NursingPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('nursing:plan:add')")
     @Log(title = "护理计划", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@ApiParam(value = "护理计划实体", required = true) @RequestBody  NursingPlan nursingPlan)
+    public AjaxResult add(@ApiParam(value = "护理计划实体", required = true) @RequestBody NursingPlanDto dto)
     {
-        return toAjax(nursingPlanService.insertNursingPlan(nursingPlan));
+        return toAjax(nursingPlanService.insertNursingPlan(dto));
     }
 
     /**
@@ -97,9 +99,9 @@ public class NursingPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('nursing:plan:edit')")
     @Log(title = "护理计划", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@ApiParam(value = "护理计划实体", required = true) @RequestBody  NursingPlan nursingPlan)
+    public AjaxResult edit(@ApiParam(value = "护理计划实体", required = true) @RequestBody  NursingPlanDto dto)
     {
-        return toAjax(nursingPlanService.updateNursingPlan(nursingPlan));
+        return toAjax(nursingPlanService.updateNursingPlan(dto));
     }
 
     /**
@@ -107,10 +109,10 @@ public class NursingPlanController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('nursing:plan:remove')")
     @Log(title = "护理计划", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+	@DeleteMapping("/{id}")
     @ApiOperation("删除护理计划")
-    public AjaxResult remove(@ApiParam(value = "护理计划ID数组", required = true) @PathVariable Long[] ids)
+    public AjaxResult remove(@ApiParam(value = "护理计划ID数组", required = true) @PathVariable Long id)
     {
-        return toAjax(nursingPlanService.deleteNursingPlanByIds(ids));
+        return toAjax(nursingPlanService.deleteNursingPlanById(id));
     }
 }

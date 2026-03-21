@@ -2,6 +2,7 @@ package com.zzyl.nursing.service.impl;
 
 import java.util.List;
 import com.zzyl.common.utils.DateUtils;
+import com.zzyl.nursing.vo.NursingProjectVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -92,5 +93,11 @@ public class NursingProjectServiceImpl extends ServiceImpl<NursingProjectMapper,
     public int deleteNursingProjectById(Long id)
     {
         return removeById(id) ? 1 : 0;
+    }
+
+    @Override
+    public List<NursingProjectVo> selectAll() {
+        List<NursingProjectVo> list = nursingProjectMapper.selectAll();
+        return list;
     }
 }
