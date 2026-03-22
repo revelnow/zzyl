@@ -5,6 +5,7 @@ import com.zzyl.common.utils.DateUtils;
 import com.zzyl.common.utils.bean.BeanUtils;
 import com.zzyl.nursing.dto.NursingPlanDto;
 import com.zzyl.nursing.mapper.NursingProjectPlanMapper;
+import com.zzyl.nursing.vo.NursingLevelVo;
 import com.zzyl.nursing.vo.NursingPlanVo;
 import com.zzyl.nursing.vo.NursingProjectPlanVo;
 import org.springframework.beans.BeansException;
@@ -148,5 +149,11 @@ public class NursingPlanServiceImpl extends ServiceImpl<NursingPlanMapper,Nursin
         nursingProjectPlanMapper.deleteByPlanId(id);
         //删除护理计划
         return removeById(id) ? 1 : 0;
+    }
+
+    @Override
+    public List<NursingPlanVo> listAll() {
+
+        return nursingPlanMapper.selectAll();
     }
 }

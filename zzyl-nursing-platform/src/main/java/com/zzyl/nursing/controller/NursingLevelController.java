@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zzyl.common.core.domain.R;
+import com.zzyl.nursing.vo.NursingLevelVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -46,26 +47,26 @@ public class NursingLevelController extends BaseController
     @PreAuthorize("@ss.hasPermi('nursing:level:list')")
     @GetMapping("/list")
     @ApiOperation("查询护理等级列表")
-    public TableDataInfo<List<NursingLevel>> list(@ApiParam("查询条件对象") NursingLevel nursingLevel)
+    public TableDataInfo<List<NursingLevelVo>> list(@ApiParam("查询条件对象") NursingLevel nursingLevel)
     {
         startPage();
-        List<NursingLevel> list = nursingLevelService.selectNursingLevelList(nursingLevel);
+        List<NursingLevelVo> list = nursingLevelService.selectNursingLevelList(nursingLevel);
         return getDataTable(list);
     }
 
-    /**
-     * 导出护理等级列表
-     */
-    @ApiOperation("导出护理等级详细信息")
-    @PreAuthorize("@ss.hasPermi('nursing:level:export')")
-    @Log(title = "护理等级", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    public void export(@ApiParam("导出的查询条件") HttpServletResponse response, NursingLevel nursingLevel)
-    {
-        List<NursingLevel> list = nursingLevelService.selectNursingLevelList(nursingLevel);
-        ExcelUtil<NursingLevel> util = new ExcelUtil<NursingLevel>(NursingLevel.class);
-        util.exportExcel(response, list, "护理等级数据");
-    }
+//    /**
+//     * 导出护理等级列表
+//     */
+//    @ApiOperation("导出护理等级详细信息")
+//    @PreAuthorize("@ss.hasPermi('nursing:level:export')")
+//    @Log(title = "护理等级", businessType = BusinessType.EXPORT)
+//    @PostMapping("/export")
+//    public void export(@ApiParam("导出的查询条件") HttpServletResponse response, NursingLevel nursingLevel)
+//    {
+//        List<NursingLevel> list = nursingLevelService.selectNursingLevelList(nursingLevel);
+//        ExcelUtil<NursingLevel> util = new ExcelUtil<NursingLevel>(NursingLevel.class);
+//        util.exportExcel(response, list, "护理等级数据");
+//    }
 
     /**
      * 获取护理等级详细信息
@@ -112,5 +113,11 @@ public class NursingLevelController extends BaseController
     public AjaxResult remove(@ApiParam(value = "护理等级ID数组", required = true) @PathVariable Long[] ids)
     {
         return toAjax(nursingLevelService.deleteNursingLevelByIds(ids));
+    }
+
+    @ApiOperation("查询护理等级列表")
+    @GetMapping("/listAll")
+    public R<List<NursingLevel>> listAll(){
+        return R.ok(nursingLevelService.getNursingLevel());
     }
 }

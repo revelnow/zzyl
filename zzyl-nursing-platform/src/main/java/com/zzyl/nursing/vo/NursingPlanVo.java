@@ -27,7 +27,20 @@ public class NursingPlanVo {
     @ApiModelProperty(value = "状态（0：禁用，1：启用）")
     private Integer status;
 
+
     @ApiModelProperty(value = "护理计划项目列表")
     List<NursingProjectPlanVo> projectPlans;
+
+    /**
+     * 创建时间
+     */
+    @ApiModelProperty(value = "创建时间")
+    private String createTime;
+
+    /**
+     * 创建ID
+     */
+    @ApiModelProperty(value = "创建ID")
+    private Long createId;
 
 }

@@ -1,9 +1,13 @@
 package com.zzyl.nursing.mapper;
 
 import java.util.List;
+
+import com.zzyl.nursing.vo.NursingLevelVo;
+import com.zzyl.nursing.vo.NursingPlanVo;
 import org.apache.ibatis.annotations.Mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zzyl.nursing.domain.NursingPlan;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 护理计划Mapper接口
@@ -61,4 +65,12 @@ public interface NursingPlanMapper extends BaseMapper<NursingPlan>
      * @return 结果
      */
     public int deleteNursingPlanByIds(Long[] ids);
+
+    /**
+     * 查询护理计划列表
+     *
+     * @return 列表
+     */
+    @Select("select  id,sort_no, plan_name, status,create_time,create_by from nursing_plan  ")
+    List<NursingPlanVo> selectAll();
 }

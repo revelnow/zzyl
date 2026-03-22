@@ -4,6 +4,7 @@ import java.util.List;
 import com.zzyl.nursing.domain.NursingPlan;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zzyl.nursing.dto.NursingPlanDto;
+import com.zzyl.nursing.vo.NursingLevelVo;
 import com.zzyl.nursing.vo.NursingPlanVo;
 
 /**
@@ -61,4 +62,6 @@ public interface INursingPlanService extends IService<NursingPlan>
      * @return 结果
      */
     public int deleteNursingPlanById(Long id);
+
+    List<NursingPlanVo> listAll();
 }

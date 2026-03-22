@@ -22,20 +22,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, name, plan_id, fee, status, description, remark, create_time, update_time, create_by, update_by from nursing_level
     </sql>
 
-    <select id="selectNursingLevelList" parameterType="NursingLevel" resultMap="NursingLevelResult">
-        <include refid="selectNursingLevelVo"/>
-        <where>  
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="planId != null "> and plan_id = #{planId}</if>
-            <if test="fee != null "> and fee = #{fee}</if>
-            <if test="status != null "> and status = #{status}</if>
-            <if test="description != null  and description != ''"> and description = #{description}</if>
-        </where>
-    </select>
+
     
     <select id="selectNursingLevelById" parameterType="Long" resultMap="NursingLevelResult">
         <include refid="selectNursingLevelVo"/>
         where id = #{id}
+    </select>
+    <select id="selectNursingLevelList" resultType="com.zzyl.nursing.vo.NursingLevelVo">
+        select * from nursing_level nl join nursing_plan np on nl.plan_id = np.id
+        <where>
+        <if test="name != null and name != ''">and name like concat('%',#{name},'%')</if>
+        <if test="status != null">and status = #{status}</if>
+        </where>
     </select>
 
     <insert id="insertNursingLevel" parameterType="NursingLevel" useGeneratedKeys="true" keyProperty="id">

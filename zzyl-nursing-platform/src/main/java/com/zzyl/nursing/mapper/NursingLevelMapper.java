@@ -1,9 +1,12 @@
 package com.zzyl.nursing.mapper;
 
 import java.util.List;
+
+import com.zzyl.nursing.vo.NursingLevelVo;
 import org.apache.ibatis.annotations.Mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zzyl.nursing.domain.NursingLevel;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 护理等级Mapper接口
@@ -28,7 +31,7 @@ public interface NursingLevelMapper extends BaseMapper<NursingLevel>
      * @param nursingLevel 护理等级
      * @return 护理等级集合
      */
-    public List<NursingLevel> selectNursingLevelList(NursingLevel nursingLevel);
+    public List<NursingLevelVo> selectNursingLevelList(NursingLevel nursingLevel);
 
     /**
      * 新增护理等级
@@ -61,4 +64,12 @@ public interface NursingLevelMapper extends BaseMapper<NursingLevel>
      * @return 结果
      */
     public int deleteNursingLevelByIds(Long[] ids);
+
+    /**
+     * 查询护理等级列表
+     *
+     * @return 护理等级集合
+     */
+    @Select("select * from nursing_level")
+    List<NursingLevel> getNursingLevel();
 }
